@@ -7,7 +7,8 @@ EXPOSE 3000 8080
 RUN ln -s "${CONFIG_DIR}" "${APP_DIR}/qBittorrent"
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/main privoxy iptables iproute2 openresolv wireguard-tools && \
-    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community ipcalc mediainfo
+    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community ipcalc mediainfo && \
+    apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing wireguard-go
 
 ARG QBITTORRENT_FULL_VERSION
 
