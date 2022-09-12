@@ -33,5 +33,6 @@ else
     qbittorrent_version=$(echo "${qbittorrent_full_version}" | sed -e "s/release-//g" -e "s/_.*//g")
     [[ -z ${qbittorrent_version} ]] && exit 1
     version="${qbittorrent_version}--${flood_version}"
-    echo '{"version":"'"${version}"'","qbittorrent_version":"'"${qbittorrent_version}"'","qbittorrent_full_version":"'"${qbittorrent_full_version}"'","flood_version":"'"${flood_version}"'"}' | jq . > VERSION.json
+    version_json=$(cat ./VERSION.json)
+    jq '.version = "'"${version}"'" | .qbittorrent_version = "'"${qbittorrent_version}"'" | .qbittorrent_full_version = "'"${qbittorrent_full_version}"'" | .flood_version = "'"${flood_version}"'"' <<< "${version_json}" > VERSION.json
 fi
